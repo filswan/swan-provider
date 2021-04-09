@@ -53,6 +53,7 @@ git clone https://github.com/nebulaai/swan-miner
 cp swan-miner/filswan_miner/aria2.conf /etc/aria2/
 sudo cp swan-miner/filswan_miner/aria2c.service /etc/systemd/system/
 # Change User and Group in the [Service] section of the aria2c.service file
+sudo systemctl enable aria2c.service
 sudo systemctl start aria2c.service
 ```
 

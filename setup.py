@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
      name='filswan_miner',
-     version='0.1',
+     version='0.2',
      author="nbfs",
      author_email="account@nbai.io",
      description="Swan Miner tool",

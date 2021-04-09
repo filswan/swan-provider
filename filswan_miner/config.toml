@@ -8,7 +8,7 @@ api_key = ""
 access_token = ""
 [aria2]
 aria2_download_dir = "/path/to/download/"
-aria2_conf = "./aria2.conf"
+aria2_conf = "/etc/aria2/aria2.conf"
 aria2_host = "localhost"
 aria2_port = "6800"
 aria2_secret = "my_aria2_secret"
