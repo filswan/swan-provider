@@ -12,7 +12,7 @@ setuptools.setup(
      description="Swan Miner tool",
      long_description=long_description,
      long_description_content_type="text/markdown",
-     url="https://github.com/boqian-nbai/swan-miner",
+     url="https://github.com/nebulaai/swan-miner",
      packages=setuptools.find_packages(),
      classifiers=[
          "Programming Language :: Python :: 3",
