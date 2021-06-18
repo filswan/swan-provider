@@ -12,7 +12,7 @@ setuptools.setup(
      description="Swan Miner tool",
      long_description=long_description,
      long_description_content_type="text/markdown",
-     url="https://github.com/nebulaai/swan-miner",
+     url="https://github.com/filswan/swan-miner",
      packages=setuptools.find_packages(),
      install_requires=[
          'toml',
