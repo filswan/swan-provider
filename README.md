@@ -10,9 +10,11 @@ This miner tool listens to the tasks come from Swan platform. It provides the fo
 
 ### Prerequisites
 
-```
+```shell
 sudo apt install python3-pip
 sudo apt install aria2
+pip3 install filswan-miner
+# Update config file located at "~/.local/filswan/miner/config/config.toml"
 ```
 
 ### Config
