@@ -51,8 +51,8 @@ touch /etc/aria2/aria2.session
 git clone https://github.com/filswan/swan-miner
 cd swan-miner
 cp config/aria2.conf /etc/aria2/
-sudo cp aria2c.service /etc/systemd/system/
 # Change User and Group in the [Service] section of the aria2c.service file
+sudo cp aria2c.service /etc/systemd/system/
 sudo systemctl enable aria2c.service
 sudo systemctl start aria2c.service
 ```
@@ -60,5 +60,6 @@ sudo systemctl start aria2c.service
 ### Start swan_miner
 ```shell
 cd swan-miner
+# Update config/config.toml
 python3 swan_miner.py
 ```
