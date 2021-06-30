@@ -6,7 +6,7 @@ import jwt
 import requests
 import subprocess
 
-from filswan_miner.common.Miner import Miner
+from common.Miner import Miner
 
 # task type
 task_type_verified = "verified"

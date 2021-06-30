@@ -9,11 +9,11 @@ from typing import List
 from urllib.parse import urlparse
 
 sys.path.append("../")
-from filswan_miner.common.config import read_config
-from filswan_miner.common.swan_client import SwanClient
-from filswan_miner.common.logging import get_logger
+from common.config import read_config
+from common.swan_client import SwanClient
+from common.logging import get_logger
 
-from filswan_miner.aria2c import Aria2c
+from aria2c import Aria2c
 
 DEAL_DOWNLOADING_STATUS = 'Downloading'
 DEAL_DOWNLOADED_STATUS = 'Downloaded'
@@ -132,8 +132,8 @@ def check_download_status(aria2_client: Aria2c, swan_client: SwanClient, miner_f
                         complete_percent = int(
                             int(task_state["completedLength"]) / int(task_state["totalLength"]) * 10000) / 100
                         speed = int(int(task_state["downloadSpeed"]) / 1000)
-                        logger.info("continue downloading deal cid %s complete %s%% speed %s KiB" % (
-                            deal.get("cid"), complete_percent, speed))
+                        logger.info("continue downloading deal id %s complete %s%% speed %s KiB" % (
+                            deal.get("id"), complete_percent, speed))
                         continue
 
                     if is_completed(task_state):

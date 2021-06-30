@@ -8,9 +8,9 @@ import json
 from datetime import datetime
 
 sys.path.append("../")
-from filswan_miner.common.config import read_config
-from filswan_miner.common.swan_client import SwanClient
-from filswan_miner.common.logging import get_logger
+from common.config import read_config
+from common.swan_client import SwanClient
+from common.logging import get_logger
 
 DEAL_STATUS_FAILED = "ImportFailed"
 DEAL_STATUS_WAITING = "ReadyForImport"
@@ -62,10 +62,10 @@ def update_offline_deal_status(status: str, note: str, deal_id: str, client: Swa
         logger.error(str(e))
 
 
-def scanner(config_path: str):
+def scanner():
     logger = get_logger('swan_miner_deal_scanner')
 
-    config = read_config(config_path)
+    config = read_config()
 
     api_url = config['main']['api_url']
     api_key = config['main']['api_key']

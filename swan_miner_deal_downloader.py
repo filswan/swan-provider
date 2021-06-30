@@ -4,21 +4,21 @@ import sys
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
-from filswan_miner.aria2c import Aria2c
-from filswan_miner.aria2_service import check_download_status, start_downloading
+from aria2c import Aria2c
+from aria2_service import check_download_status, start_downloading
 import subprocess
 
-from filswan_miner.common.config import read_config
-from filswan_miner.common.swan_client import SwanClient
-from filswan_miner.common.logging import get_logger
+from common.config import read_config
+from common.swan_client import SwanClient
+from common.logging import get_logger
 
 
-def downloader(config_path: str):
+def downloader():
 
     logger = get_logger('swan_miner_deal_downloader')
 
 
-    config = read_config(config_path)
+    config = read_config()
     MINER_FID = config['main']['miner_fid']
     ARIA2_HOTS = config['aria2']['aria2_host']
     ARIA2_PORT = config['aria2']['aria2_port']

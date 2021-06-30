@@ -5,9 +5,9 @@ import sys
 import time
 
 sys.path.append("../")
-from filswan_miner.common.config import read_config
-from filswan_miner.common.swan_client import SwanClient
-from filswan_miner.common.logging import get_logger
+from common.config import read_config
+from common.swan_client import SwanClient
+from common.logging import get_logger
 
 DEAL_STATUS_FAILED = "ImportFailed"
 DEAL_STATUS_READY = "ReadyForImport"
@@ -55,8 +55,8 @@ def update_offline_deal_status(status: str, note: str, deal_id: str, client: Swa
         logger.error(str(e))
 
 
-def importer(config_path: str):
-    config = read_config(config_path)
+def importer():
+    config = read_config()
 
     logger = get_logger("swan_miner_deal_importer")
 
