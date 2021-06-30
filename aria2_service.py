@@ -9,11 +9,11 @@ from typing import List
 from urllib.parse import urlparse
 
 sys.path.append("../")
-from filswan_miner.common.config import read_config
-from filswan_miner.common.swan_client import SwanClient
-from filswan_miner.common.logging import get_logger
+from common.config import read_config
+from common.swan_client import SwanClient
+from common.logging import get_logger
 
-from filswan_miner.aria2c import Aria2c
+from aria2c import Aria2c
 
 DEAL_DOWNLOADING_STATUS = 'Downloading'
 DEAL_DOWNLOADED_STATUS = 'Downloaded'

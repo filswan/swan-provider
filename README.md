@@ -13,8 +13,6 @@ This miner tool listens to the tasks come from Swan platform. It provides the fo
 ```shell
 sudo apt install python3-pip
 sudo apt install aria2
-pip3 install filswan-miner
-# Update config file located at "~/.local/filswan/miner/config/config.toml"
 ```
 
 ### Config
@@ -51,21 +49,16 @@ sudo mkdir /etc/aria2
 sudo chown $USER:$USER /etc/aria2/
 touch /etc/aria2/aria2.session
 git clone https://github.com/filswan/swan-miner
-cp filswan_miner/aria2.conf /etc/aria2/
-sudo cp filswan_miner/aria2c.service /etc/systemd/system/
+cd swan-miner
+cp config/aria2.conf /etc/aria2/
+sudo cp aria2c.service /etc/systemd/system/
 # Change User and Group in the [Service] section of the aria2c.service file
 sudo systemctl enable aria2c.service
 sudo systemctl start aria2c.service
 ```
 
 ### Start swan_miner
-```python3
-import os
-import filswan_miner
-from filswan_miner import swan_miner as miner
-
-
-if __name__ == "__main__":
-
-    miner.start("%s%s" % (os.environ.get('HOME'), "/.local/filswan/miner/config/config.toml"))
+```shell
+cd swan-miner
+python3 swan_miner.py
 ```
