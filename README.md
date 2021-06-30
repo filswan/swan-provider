@@ -60,6 +60,7 @@ sudo systemctl start aria2c.service
 ### Start swan_miner
 ```shell
 cd swan-miner
+pip3 install -r requirements.txt
 # Update config/config.toml
 python3 swan_miner.py
 ```
