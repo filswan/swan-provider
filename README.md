@@ -77,8 +77,6 @@ For `config.toml`,
 
 
 ### Step 2.2 Run swan-miner
-
-### Start swan_miner
 ```shell
 cd swan-miner
 pip3 install -r requirements.txt
