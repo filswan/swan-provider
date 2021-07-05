@@ -77,22 +77,6 @@ For `config.toml`,
 
 
 ### Step 2.2 Run swan-miner
-=======
-
-### Run Aria2 as System Service
-
-```shell
-sudo mkdir /etc/aria2
-sudo chown $USER:$USER /etc/aria2/
-touch /etc/aria2/aria2.session
-git clone https://github.com/filswan/swan-miner
-cd swan-miner
-cp config/aria2.conf /etc/aria2/
-# Change User and Group in the [Service] section of the aria2c.service file
-sudo cp aria2c.service /etc/systemd/system/
-sudo systemctl enable aria2c.service
-sudo systemctl start aria2c.service
-```
 
 ### Start swan_miner
 ```shell
