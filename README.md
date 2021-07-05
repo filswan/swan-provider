@@ -18,6 +18,8 @@ sudo apt install aria2
 
 ### Step 1.2 Run Aria2 as System Service
 
+Set up Aria2
+
 ```shell
 sudo mkdir /etc/aria2
 sudo chown $USER:$USER /etc/aria2/
@@ -28,10 +30,11 @@ cp config/aria2.conf /etc/aria2/
 sudo cp aria2c.service /etc/systemd/system/
 ```
 
-Change User and Group in the [Service] section of the aria2c.service file to the name of the computer or server where the miner located.
+Modify aria2c.service file wtih the name of the computer or server where the miner located.
 
 ```shell
-# Change User and Group in the [Service] section of the aria2c.service file
+# Change User and Group in the [Service] section of the aria2c.service file 
+# with the name of the server/computer, such as mycomputer
 sudo systemctl enable aria2c.service
 sudo systemctl start aria2c.service
 ```
@@ -40,6 +43,11 @@ For aria2.conf
 
 - **rpc-secret:**  default: my_aria2_secret. It will be used in the config.toml for rpc.
 
+### Step 1.3 Test Aria2 service from log
+```shell
+journalctl -u aria2c.service -f
+```
+The Aira2 service will listen on certain port if installed and started correctly.
 ## Step 2. Start swan_miner
 ### Step 2.1 Modify the config.toml file with the miner information
 
