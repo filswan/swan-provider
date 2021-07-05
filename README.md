@@ -30,11 +30,11 @@ cp config/aria2.conf /etc/aria2/
 sudo cp aria2c.service /etc/systemd/system/
 ```
 
-Modify aria2c.service file wtih the name of the computer or server where the miner located.
+Modify aria2c.service file 
 
 ```shell
 # Change User and Group in the [Service] section of the aria2c.service file 
-# with the name of the server/computer, such as mycomputer
+# with the name of the server/computer where the miner located, such as mycomputer
 sudo systemctl enable aria2c.service
 sudo systemctl start aria2c.service
 ```
@@ -48,8 +48,11 @@ For aria2.conf
 journalctl -u aria2c.service -f
 ```
 The Aira2 service will listen on certain port if installed and started correctly.
+
 ## Step 2. Start swan_miner
-### Step 2.1 Modify the config.toml file with the miner information
+### Step 2.1 Modify config file with the miner information
+
+Modify congfig.toml file in folder swan-miner with the information of the miner, such as filecoin miner id,
 
 For config.toml
 
