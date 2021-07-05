@@ -16,30 +16,6 @@ sudo apt install python3-pip
 sudo apt install aria2
 ```
 
-
-### Config
-
-For config.toml
-
-[main]
-
-- **api_url:** Swan API address. For Swan production, it is "https://api.filswan.com"
-- **miner_fid:** Your filecoin Miner ID
-- **expected_sealing_time:** The time expected for sealing deals. Deals starting too soon will be rejected.
-- **import_interval:** Importing interval between each deal.
-- **scan_interval:** Time interval to scan all the ongoing deals and update status on Swan platform.
-- **api_key & access_token:** Acquire from [Filswan](https://www.filswan.com) -> "My Profile"->"Developer Settings". You
-  can also check the [Guide](https://nebulaai.medium.com/how-to-use-api-key-in-swan-a2ebdb005aa4)
-
-[aria2]
-
-- **aria2_download_dir:** Directory where offline deal files will be downloaded for importing
-- **aria2_conf:** Aria2 configuration file location
-- **aria2_host:** Aria2 server address
-- **aria2_port:** Aria2 server port
-- **aria2_secret:** Must be the same value as rpc-secre in aria2.conf
-
-
 ### Step 1.2 Run Aria2 as System Service
 
 ```shell
