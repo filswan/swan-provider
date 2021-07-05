@@ -80,4 +80,5 @@ For config.toml,
 cd swan-miner
 python3 swan_miner.py
 ```
-Now you are all set. Enjoy using swan miner!
+
+### Now you are all set. Enjoy using swan miner!
