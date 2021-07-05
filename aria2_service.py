@@ -132,8 +132,8 @@ def check_download_status(aria2_client: Aria2c, swan_client: SwanClient, miner_f
                         complete_percent = int(
                             int(task_state["completedLength"]) / int(task_state["totalLength"]) * 10000) / 100
                         speed = int(int(task_state["downloadSpeed"]) / 1000)
-                        logger.info("continue downloading deal cid %s complete %s%% speed %s KiB" % (
-                            deal.get("cid"), complete_percent, speed))
+                        logger.info("continue downloading deal id %s complete %s%% speed %s KiB" % (
+                            deal.get("id"), complete_percent, speed))
                         continue
 
                     if is_completed(task_state):
