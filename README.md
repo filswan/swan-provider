@@ -1,27 +1,61 @@
 # Miner Tool Guide
 
-## Getting Started
+## Features:
 
-This miner tool listens to the tasks come from Swan platform. It provides the following functions:
+This miner tool listens to the tasks that come from Swan platform. It provides the following functions:
 
-* Start arial2 download service for downloading tasks.
-* Import deals once download completed.
-* Synchronize deal status with Swan platform, so client will know the realtime status changes
+* Download tasks automatically using Aria2 for downloading service.
+* Import deals once download tasks completed.
+* Synchronize deal status with Swan platform so that client will know the status changes in realtime.
 
-### Prerequisites
+## Step 1. Getting Started
+### Step 1.1 Prerequisites
 
 ```shell
 sudo apt install python3-pip
 sudo apt install aria2
 ```
 
-### Config
+### Step 1.2 Run Aria2 as System Service
 
-For aria2.conf
+Set up Aria2:
+
+```shell
+sudo mkdir /etc/aria2
+sudo chown $USER:$USER /etc/aria2/
+touch /etc/aria2/aria2.session
+git clone https://github.com/filswan/swan-miner
+cd swan-miner
+# copy config files to aria2
+cp config/aria2.conf /etc/aria2/
+sudo cp aria2c.service /etc/systemd/system/
+```
+
+Modify `aria2c.service` file: 
+
+```shell
+# Change User and Group in the [Service] section of the aria2c.service file in /etc/systemd/system/
+# with the name of the server/computer where the miner located, such as mycomputer
+sudo systemctl enable aria2c.service
+sudo systemctl start aria2c.service
+```
+
+For `aria2.conf`,
 
 - **rpc-secret:**  default: my_aria2_secret. It will be used in the config.toml for rpc.
 
-For config.toml
+### Step 1.3 Test Aria2 service from log
+```shell
+journalctl -u aria2c.service -f
+```
+The Aira2 service will listen on certain port if installed and started correctly.
+
+## Step 2. Start swan_miner
+### Step 2.1 Modify config file with the miner information
+
+Modify `congfig.toml` file in folder `swan-miner` with the information of the miner, such as filecoin miner id, api key and access token.
+
+For `config.toml`,
 
 [main]
 
@@ -42,25 +76,12 @@ For config.toml
 - **aria2_secret:** Must be the same value as rpc-secre in aria2.conf
 
 
-### Run Aria2 as System Service
-
-```shell
-sudo mkdir /etc/aria2
-sudo chown $USER:$USER /etc/aria2/
-touch /etc/aria2/aria2.session
-git clone https://github.com/filswan/swan-miner
-cd swan-miner
-cp config/aria2.conf /etc/aria2/
-# Change User and Group in the [Service] section of the aria2c.service file
-sudo cp aria2c.service /etc/systemd/system/
-sudo systemctl enable aria2c.service
-sudo systemctl start aria2c.service
-```
-
-### Start swan_miner
+### Step 2.2 Run swan-miner
 ```shell
 cd swan-miner
 pip3 install -r requirements.txt
 # Update config/config.toml
 python3 swan_miner.py
 ```
+
+#### Now you are all set. Enjoy using swan miner!
