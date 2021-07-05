@@ -18,7 +18,7 @@ sudo apt install aria2
 
 ### Step 1.2 Run Aria2 as System Service
 
-Set up Aria2
+Set up Aria2:
 
 ```shell
 sudo mkdir /etc/aria2
@@ -26,20 +26,21 @@ sudo chown $USER:$USER /etc/aria2/
 touch /etc/aria2/aria2.session
 git clone https://github.com/filswan/swan-miner
 cd swan-miner
+# copy config files to aria2
 cp config/aria2.conf /etc/aria2/
 sudo cp aria2c.service /etc/systemd/system/
 ```
 
-Modify aria2c.service file 
+Modify aria2c.service file: 
 
 ```shell
-# Change User and Group in the [Service] section of the aria2c.service file 
+# Change User and Group in the [Service] section of the aria2c.service file in /etc/systemd/system/
 # with the name of the server/computer where the miner located, such as mycomputer
 sudo systemctl enable aria2c.service
 sudo systemctl start aria2c.service
 ```
 
-For aria2.conf
+For aria2.conf,
 
 - **rpc-secret:**  default: my_aria2_secret. It will be used in the config.toml for rpc.
 
@@ -52,9 +53,9 @@ The Aira2 service will listen on certain port if installed and started correctly
 ## Step 2. Start swan_miner
 ### Step 2.1 Modify config file with the miner information
 
-Modify congfig.toml file in folder swan-miner with the information of the miner, such as filecoin miner id,
+Modify congfig.toml file in folder swan-miner with the information of the miner, such as filecoin miner id, api key and access token.
 
-For config.toml
+For config.toml,
 
 [main]
 
@@ -79,3 +80,4 @@ For config.toml
 cd swan-miner
 python3 swan_miner.py
 ```
+Now you are all set. Enjoy using swan miner!
