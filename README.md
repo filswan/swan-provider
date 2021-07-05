@@ -53,7 +53,7 @@ The Aira2 service will listen on certain port if installed and started correctly
 ## Step 2. Start swan_miner
 ### Step 2.1 Modify config file with the miner information
 
-Modify `congfig.toml` file in folder `swan-miner` with the information of the miner, such as filecoin miner id, api key and access token.
+Modify `congfig.toml` file in folder `swan-miner/config` with the information of the miner, such as filecoin miner id, api key and access token.
 
 For `config.toml`,
 
