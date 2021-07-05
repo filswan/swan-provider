@@ -75,7 +75,7 @@ For `config.toml`,
 - **aria2_port:** Aria2 server port
 - **aria2_secret:** Must be the same value as rpc-secre in aria2.conf
 
-### Step 2.2 run swan-miner
+### Step 2.2 Run swan-miner
 ```shell
 cd swan-miner
 python3 swan_miner.py
