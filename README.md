@@ -99,10 +99,10 @@ git clone https://github.com/filswan/swan-miner
 
 cd swan-miner
 
-# Copy config files and service file
+# Copy config file and service file
 cp config/aria2.conf /etc/aria2/
 sudo cp aria2c.service /etc/systemd/system/
-#modify the aria2c.service file
+# Modify the aria2c.service file
 
 # Set to start Aria2 automatically
 sudo systemctl enable aria2c.service
