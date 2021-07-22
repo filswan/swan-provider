@@ -99,14 +99,14 @@ git clone https://github.com/filswan/swan-miner
 
 cd swan-miner
 
-# Copy config files to aria2
+# Copy config files and service file
 cp config/aria2.conf /etc/aria2/
-# Copy service file to system, and modify aria2c.service file
 sudo cp aria2c.service /etc/systemd/system/
+#modify the aria2c.service file
 
-# 
+# Set to start Aria2 automatically
 sudo systemctl enable aria2c.service
-# Start aria2
+# Start Aria2
 sudo systemctl start aria2c.service
 ```
 
@@ -134,10 +134,11 @@ pip3 install -r requirements.txt
 
 # Modify config.toml file with the miner information
 
-# Run swan miner
+# Run Swan Miner
 python3 swan_miner.py
 
-# Run swan miner in the background, and create a log file
+# Run Swan Miner in the background, and create a log file (Optional)
 nohup python3 -u swan_miner.py >> swan_miner.log &
 ```
 
+The deal status will be synchronized on the filwan.com, both client and miner will know the status changes in realtime.
