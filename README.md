@@ -75,6 +75,7 @@ aria2_secret = "my_aria2_secret"
 
 
 ## Installation
+
 Install miner tool and aria2
 ```shell
 sudo apt install python3-pip
@@ -89,9 +90,9 @@ sudo apt install aria2
 
 ```shell
 sudo mkdir /etc/aria2
-# 
+# Change user authority from root to your computer
 sudo chown $USER:$USER /etc/aria2/
-# 
+# Create a session file
 touch /etc/aria2/aria2.session
 # Checkout the source and install 
 git clone https://github.com/filswan/swan-miner
@@ -103,18 +104,23 @@ cp config/aria2.conf /etc/aria2/
 # Copy service file to system, and modify aria2c.service file
 sudo cp aria2c.service /etc/systemd/system/
 
+# 
 sudo systemctl enable aria2c.service
+# Start aria2
 sudo systemctl start aria2c.service
 ```
 
-#### Step 1.2 Test Aria2 service from log
+#### Step 1.2 Test Aria2 service from log (Optional)
+
+Check if Aria2 service is successfullly started
+
 ```shell
 journalctl -u aria2c.service -f
 ```
 The output will be like:
 
 ```shell
-Listen to TCP port....
+Example...
 ```
 
 The Aira2 service will listen on certain port if installed and started correctly.
@@ -128,7 +134,10 @@ pip3 install -r requirements.txt
 
 # Modify config.toml file with the miner information
 
-# Start swan_miner and print out a log
+# Run swan miner
+python3 swan_miner.py
+
+# Run swan miner in the background, and create a log file
 nohup python3 -u swan_miner.py >> swan_miner.log &
 ```
 
