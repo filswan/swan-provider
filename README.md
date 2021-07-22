@@ -8,55 +8,53 @@ This miner tool listens to the tasks that come from Swan platform. It provides t
 * Import deals once download tasks completed.
 * Synchronize deal status with Swan platform so that client will know the status changes in realtime.
 
-## Step 1. Getting Started
-### Step 1.1 Prerequisites
+## Prerequisite
+- Lotus-miner
+- python 3.7+
+- pip3
 
-```shell
-sudo apt install python3-pip
-sudo apt install aria2
-```
-
-### Step 1.2 Run Aria2 as System Service
-
-Set up Aria2:
-
-```shell
-sudo mkdir /etc/aria2
-sudo chown $USER:$USER /etc/aria2/
-touch /etc/aria2/aria2.session
-git clone https://github.com/filswan/swan-miner
-cd swan-miner
-# copy config files to aria2
-cp config/aria2.conf /etc/aria2/
-sudo cp aria2c.service /etc/systemd/system/
-```
-
-Modify `aria2c.service` file: 
-
-```shell
-# Change User and Group in the [Service] section of the aria2c.service file in /etc/systemd/system/
-# with the name of the server/computer where the miner located, such as mycomputer
-sudo systemctl enable aria2c.service
-sudo systemctl start aria2c.service
-```
-
-For `aria2.conf`,
-
+## Config
+### **In aria2.conf**
 - **rpc-secret:**  default: my_aria2_secret. It will be used in the config.toml for rpc.
 
-### Step 1.3 Test Aria2 service from log
+### **In aria2c.service**
 ```shell
-journalctl -u aria2c.service -f
+[Unit]
+Description=Aria2c download manager
+After=network.target
+
+[Service]
+Type=simple
+User=user
+Group=user
+ExecStart=/usr/bin/aria2c --enable-rpc --rpc-listen-all --conf-path=/etc/aria2/aria2.conf
+
+[Install]
+WantedBy=multi-user.target
 ```
-The Aira2 service will listen on certain port if installed and started correctly.
+[Service]
+- **User**: Change it with the name of server where the miner located
+- **Group**: Change it with the name of computer where the miner located, such as mycomputer
 
-## Step 2. Start swan_miner
-### Step 2.1 Modify config file with the miner information
+### **In config.toml**
 
-Modify `congfig.toml` file in folder `swan-miner/config` with the information of the miner, such as filecoin miner id, api key and access token.
-
-For `config.toml`,
-
+Modify config file in folder `swan-miner/config` with the information of the miner, such as filecoin miner id, api key and access token.
+```shell
+[main]
+api_url = "https://api.filswan.com"
+miner_fid = "f0xxxx"
+expected_sealing_time = 1920    # 1920 epoch or 16 hours
+import_interval = 600           # 600 seconds or 10 minutes
+scan_interval = 600           # 600 seconds or 10 minutes
+api_key = ""
+access_token = ""
+[aria2]
+aria2_download_dir = "/path/to/download/"
+aria2_conf = "/etc/aria2/aria2.conf"
+aria2_host = "localhost"
+aria2_port = "6800"
+aria2_secret = "my_aria2_secret"
+```
 [main]
 
 - **api_url:** Swan API address. For Swan production, it is "https://api.filswan.com"
@@ -76,12 +74,61 @@ For `config.toml`,
 - **aria2_secret:** Must be the same value as rpc-secre in aria2.conf
 
 
-### Step 2.2 Run swan-miner
+## Installation
+Install miner tool and aria2
 ```shell
-cd swan-miner
-pip3 install -r requirements.txt
-# Update config/config.toml
-python3 swan_miner.py
+sudo apt install python3-pip
+sudo apt install aria2
 ```
 
-#### Now you are all set. Enjoy using swan miner!
+## How to use
+
+### Step 1. Run Aria2 as System Service
+
+#### Step 1.1 Set up Aria2:
+
+```shell
+sudo mkdir /etc/aria2
+# 
+sudo chown $USER:$USER /etc/aria2/
+# 
+touch /etc/aria2/aria2.session
+# Checkout the source and install 
+git clone https://github.com/filswan/swan-miner
+
+cd swan-miner
+
+# Copy config files to aria2
+cp config/aria2.conf /etc/aria2/
+# Copy service file to system, and modify aria2c.service file
+sudo cp aria2c.service /etc/systemd/system/
+
+sudo systemctl enable aria2c.service
+sudo systemctl start aria2c.service
+```
+
+#### Step 1.2 Test Aria2 service from log
+```shell
+journalctl -u aria2c.service -f
+```
+The output will be like:
+
+```shell
+Listen to TCP port....
+```
+
+The Aira2 service will listen on certain port if installed and started correctly.
+
+### Step 2. Start swan_miner
+```shell
+cd swan-miner
+
+# Install requirements
+pip3 install -r requirements.txt
+
+# Modify config.toml file with the miner information
+
+# Start swan_miner and print out a log
+nohup python3 -u swan_miner.py >> swan_miner.log &
+```
+
