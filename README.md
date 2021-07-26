@@ -102,13 +102,19 @@ cd swan-miner
 # Copy config file and service file
 cp config/aria2.conf /etc/aria2/
 sudo cp aria2c.service /etc/systemd/system/
-# Modify the aria2c.service file
+# Modify the aria2c.service file in /etc/systemd/system/
 
 # Set to start Aria2 automatically
 sudo systemctl enable aria2c.service
 # Start Aria2
 sudo systemctl start aria2c.service
 ```
+If modify user is nessecary while the service has been started, service should be reloaded before start.
+```shell
+sudo systemctl daemon-reload
+sudo systemctl start aria2c.service
+```
+
 
 #### Step 1.2 Test Aria2 service from log (Optional)
 
