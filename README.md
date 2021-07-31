@@ -33,12 +33,12 @@ ExecStart=/usr/bin/aria2c --enable-rpc --rpc-listen-all --conf-path=/etc/aria2/a
 WantedBy=multi-user.target
 ```
 [Service]
-- **User**: Change it with the name of server where the miner located
-- **Group**: Change it with the name of computer where the miner located, such as mycomputer
+- **User**: Change it with the user of server where the miner located
+- **Group**: Change it with the group of server where the miner located
 
 ### **In config.toml**
 
-Modify config file in folder `swan-miner/config` with the information of the miner, such as filecoin miner id, api key and access token.
+Modify config file in folder `swan-provider/config` with the information of the miner, such as filecoin miner id, api key and access token.
 ```shell
 [main]
 api_url = "https://api.filswan.com"
@@ -90,14 +90,14 @@ sudo apt install aria2
 
 ```shell
 sudo mkdir /etc/aria2
-# Change user authority from root to your computer
+# Change user authority to current user
 sudo chown $USER:$USER /etc/aria2/
 # Create a session file
 touch /etc/aria2/aria2.session
 # Checkout the source and install 
-git clone https://github.com/filswan/swan-miner
+git clone https://github.com/filswan/swan-provider
 
-cd swan-miner
+cd swan-provider
 
 # Copy config file and service file
 cp config/aria2.conf /etc/aria2/
@@ -126,25 +126,26 @@ journalctl -u aria2c.service -f
 The output will be like:
 
 ```shell
-Example...
+Jul 30 03:00:00 systemd[1]: Started Aria2c download manager.
+Jul 30 03:00:00 aria2c[2433312]: 07/30 03:00:00 [NOTICE] IPv4 RPC: listening on TCP port 6800
 ```
 
 The Aira2 service will listen on certain port if installed and started correctly.
 
-### Step 2. Start swan_miner
+### Step 2. Start Swan Provider
 ```shell
-cd swan-miner
+cd swan-provider
 
 # Install requirements
 pip3 install -r requirements.txt
 
 # Modify config.toml file with the miner information
 
-# Run Swan Miner
+# Run Swan Provider directly, or
 python3 swan_miner.py
 
-# Run Swan Miner in the background, and create a log file (Optional)
-nohup python3 -u swan_miner.py >> swan_miner.log &
+# Run Swan Provider in the background, and create a log file (Optional)
+nohup python3 -u swan_miner.py > swan_miner.log &
 ```
 
 The deal status will be synchronized on the filwan.com, both client and miner will know the status changes in realtime.
